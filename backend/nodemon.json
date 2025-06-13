@@ -1,0 +1,15 @@
+{
+  "watch": ["src"],
+  "ext": "ts,js,json",
+  "ignore": ["src/**/*.spec.ts", "node_modules", "dist", "src/migrations", "data-source.ts"],
+  "exec": "nest start",
+  "legacyWatch": true,
+  "polling": true,
+  "interval": 1000,
+  "delay": 2000,
+  "verbose": true,
+  "restartable": "rs",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

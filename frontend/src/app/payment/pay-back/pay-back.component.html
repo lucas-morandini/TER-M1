@@ -1,0 +1,86 @@
+<div class="min-h-screen bg-darker text-mywhite font-rajdhani py-8">
+    <div class="max-w-md mx-auto px-4">
+      <!-- Payment Header -->
+      <div class="text-center mb-8">
+        <h1 class="font-orbitron text-3xl font-bold mb-2 text-myyellow">
+          RETRAIT DE FONDS
+        </h1>
+        <p class="text-mywhite/80">Retirez de l'argent de votre compte</p>
+      </div>
+  
+      <!-- Withdrawal Form -->
+      <div class="relative">
+        <!-- Card Container -->
+        <div class="relative bg-gradient-to-br from-dark to-mypurple/90 rounded-2xl shadow-xl border border-mypurple/60 overflow-hidden">
+          <!-- Glowing border effect -->
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-2xl blur-md opacity-60 -z-10"></div>
+  
+          <!-- Withdrawal Form -->
+          <div class="p-6">
+            <div class="mb-6">
+              <label class="block text-mywhite font-medium mb-2">Montant à retirer</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-myyellow font-bold">
+                  $
+                </div>
+                <input
+                  [(ngModel)]="amount"
+                  type="number"
+                  required
+                  class="bg-dark/70 border border-mypurple/60 text-mywhite text-xl font-orbitron rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-4 placeholder-mywhite/60"
+                  placeholder="0.00"
+                >
+              </div>
+            </div>
+  
+            <div class="mb-6">
+              <label class="block text-mywhite font-medium mb-2">IBAN</label>
+              <input
+                [(ngModel)]="bankDetails.iban"
+                type="text"
+                required
+                class="bg-dark/70 border border-mypurple/60 text-mywhite text-xl font-orbitron rounded-lg focus:ring-mypink focus:border-mypink block w-full p-4 placeholder-mywhite/60"
+                placeholder="IBAN"
+              >
+            </div>
+  
+            <div class="mb-6">
+              <label class="block text-mywhite font-medium mb-2">BIC</label>
+              <input
+                [(ngModel)]="bankDetails.bic"
+                type="text"
+                required
+                class="bg-dark/70 border border-mypurple/60 text-mywhite text-xl font-orbitron rounded-lg focus:ring-mypink focus:border-mypink block w-full p-4 placeholder-mywhite/60"
+                placeholder="BIC"
+              >
+            </div>
+  
+            <div class="mb-6">
+              <label class="block text-mywhite font-medium mb-2">Nom du titulaire du compte</label>
+              <input
+                [(ngModel)]="bankDetails.accountHolderName"
+                type="text"
+                required
+                class="bg-dark/70 border border-mypurple/60 text-mywhite text-xl font-orbitron rounded-lg focus:ring-mypink focus:border-mypink block w-full p-4 placeholder-mywhite/60"
+                placeholder="Nom du titulaire du compte"
+              >
+            </div>
+  
+            <!-- Withdrawal Button -->
+            <button
+              (click)="requestWithdrawal()"
+              class="w-full bg-myyellow text-dark font-orbitron font-semibold py-4 px-6 rounded-lg hover:bg-myyellow/90 transition-all duration-300 transform hover:-translate-y-1 shadow-glow hover:shadow-glow-hover flex items-center justify-center"
+            >
+              DEMANDER UN RETRAIT
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Additional Info -->
+      <div class="mt-6 text-center text-sm text-mywhite/70">
+        <p>En effectuant ce retrait, vous acceptez nos <a href="#" class="text-mypink hover:text-mypink/80 transition-colors">conditions d'utilisation</a>.</p>
+      </div>
+    </div>
+  </div>
+  

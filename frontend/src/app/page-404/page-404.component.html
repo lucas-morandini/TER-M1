@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Non Trouvée | BetESPORTS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mypurple: '#4c2882',
+                        mypink: '#c86bfa',
+                        mywhite: '#f5f5f5',
+                        myyellow: '#fbe300',
+                        dark: '#1a1a2e',
+                        darker: '#12121e',
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glitch': 'glitch 1s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glitch: {
+                            '0%, 100%': { transform: 'translate(0)' },
+                            '20%': { transform: 'translate(-5px, 5px)' },
+                            '40%': { transform: 'translate(-5px, -5px)' },
+                            '60%': { transform: 'translate(5px, 5px)' },
+                            '80%': { transform: 'translate(5px, -5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        .glow-text {
+            text-shadow: 0 0 10px rgba(251, 227, 0, 0.7);
+        }
+        
+        .glitch-effect {
+            position: relative;
+        }
+        
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: "404";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-effect::before {
+            color: #c86bfa;
+            z-index: -1;
+            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            animation-delay: 0.1s;
+        }
+        
+        .glitch-effect::after {
+            color: #fbe300;
+            z-index: -2;
+            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+            animation-delay: 0.2s;
+        }
+        
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(76, 40, 130, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(76, 40, 130, 0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: center center;
+            animation: grid-move 15s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 20px 20px;
+            }
+        }
+        
+        .glow-border {
+            position: relative;
+        }
+        
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4c2882, #c86bfa, #fbe300);
+            border-radius: 24px;
+            z-index: -1;
+            animation: border-glow 3s ease infinite;
+        }
+        
+        @keyframes border-glow {
+            0% {
+                opacity: 0.6;
+                filter: blur(10px);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(15px);
+            }
+            100% {
+                opacity: 0.6;
+                filter: blur(10px);
+            }
+        }
+    </style>
+</head>
+<body class="bg-darker min-h-screen font-rajdhani text-mywhite flex flex-col">
+    
+
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4 cyber-grid">
+        <!-- 404 Container -->
+        <div class="max-w-3xl w-full relative">
+            <!-- Glowing Background Effect -->
+            <div class="absolute -inset-1 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-3xl blur-xl opacity-50 -z-10 animate-pulse-slow"></div>
+            
+            <div class="relative bg-gradient-to-b from-dark/95 to-mypurple/30 rounded-2xl p-8 md:p-12 border border-mypink/40 shadow-2xl overflow-hidden">
+                <!-- Decorative Elements -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-mypurple/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-mypink/20 rounded-full blur-3xl -ml-32 -mb-32"></div>
+                
+                <!-- 404 Text -->
+                <div class="text-center mb-8">
+                    <h1 class="font-orbitron text-8xl md:text-9xl font-bold text-mywhite glitch-effect mb-4">404</h1>
+                    <h2 class="font-orbitron text-2xl md:text-3xl font-bold text-myyellow glow-text mb-4">GAME OVER</h2>
+                    <p class="text-xl text-mywhite/90 max-w-lg mx-auto">La page que vous recherchez semble avoir disparu dans le cyberespace.</p>
+                </div>
+                
+                <!-- Animated Game Controller -->
+                <div class="flex justify-center mb-10">
+                    <div class="animate-float">
+                        <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-mypink">
+                            <path d="M6.5 11H5C4.44772 11 4 11.4477 4 12V13C4 13.5523 4.44772 14 5 14H6.5C6.77614 14 7 13.7761 7 13.5V11.5C7 11.2239 6.77614 11 6.5 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19 11H17.5C17.2239 11 17 11.2239 17 11.5V13.5C17 13.7761 17.2239 14 17.5 14H19C19.5523 14 20 13.5523 20 13V12C20 11.4477 19.5523 11 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14.5 7.5H9.5C8.39543 7.5 7.5 8.39543 7.5 9.5V15.5C7.5 16.6046 8.39543 17.5 9.5 17.5H14.5C15.6046 17.5 16.5 16.6046 16.5 15.5V9.5C16.5 8.39543 15.6046 7.5 14.5 7.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 7.5V17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7.5 12.5H16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                    <a href="/" class="glow-border inline-block bg-gradient-to-r from-myyellow to-myyellow/90 text-dark font-orbitron font-semibold py-3 px-8 rounded-xl uppercase tracking-wider transition-all duration-300 hover:-translate-y-1 text-center">
+                        Retour à l'accueil
+                    </a>
+                    <a href="/leagues" class="glow-border inline-block bg-gradient-to-r from-mypurple/80 to-mypink/60 text-mywhite font-orbitron font-semibold py-3 px-8 rounded-xl uppercase tracking-wider transition-all duration-300 hover:-translate-y-1 text-center">
+                        Voir les ligues
+                    </a>
+                </div>
+                
+                <!-- Search Box -->
+                <div class="max-w-md mx-auto">
+                    <div class="relative">
+                        <input type="text" placeholder="Rechercher sur le site..." class="w-full bg-dark/70 border border-mypurple/60 text-mywhite rounded-lg py-3 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-mypink focus:border-transparent">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-mypink">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popular Links -->
+        <div class="mt-12 text-center">
+            <h3 class="font-orbitron text-xl text-mypink mb-4">DESTINATIONS POPULAIRES</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/tournaments" class="bg-mypurple/40 hover:bg-mypurple/60 px-4 py-2 rounded-lg text-mywhite/90 hover:text-myyellow transition-all duration-200">
+                    Tournois
+                </a>
+                <a href="/live" class="bg-mypurple/40 hover:bg-mypurple/60 px-4 py-2 rounded-lg text-mywhite/90 hover:text-myyellow transition-all duration-200">
+                    Paris en direct
+                </a>
+                <a href="/rankings" class="bg-mypurple/40 hover:bg-mypurple/60 px-4 py-2 rounded-lg text-mywhite/90 hover:text-myyellow transition-all duration-200">
+                    Classements
+                </a>
+                <a href="/help" class="bg-mypurple/40 hover:bg-mypurple/60 px-4 py-2 rounded-lg text-mywhite/90 hover:text-myyellow transition-all duration-200">
+                    Centre d'aide
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-dark py-6 border-t border-mypurple/40">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-mywhite/70 text-sm">
+                © 2025 BetESPORTS. Tous droits réservés.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

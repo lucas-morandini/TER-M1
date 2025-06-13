@@ -1,0 +1,23 @@
+.league-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--color-mywhite);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.league-row {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+app-league-card {
+  flex: 1;
+  max-width: calc(50% - 10px); /* Adjust width to fit two cards per row */
+}

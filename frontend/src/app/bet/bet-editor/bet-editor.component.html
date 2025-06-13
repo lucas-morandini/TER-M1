@@ -1,0 +1,65 @@
+<div class="min-h-screen bg-darker text-mywhite font-rajdhani py-8">
+    <div class="max-w-4xl mx-auto px-4">
+      <!-- Bet Header -->
+      <div class="text-center mb-8">
+        <h1 class="font-orbitron text-3xl md:text-4xl font-bold mb-2 text-myyellow">
+          MODIFIER LE PARI
+        </h1>
+        <p class="text-mywhite/80 text-lg">Modifiez la mise de votre pari</p>
+      </div>
+  
+      <!-- Main Content -->
+      <div *ngIf="bet" class="relative">
+        <!-- Bet Card -->
+        <div class="relative bg-gradient-to-br from-dark to-mypurple/90 rounded-2xl shadow-xl border border-mypurple/60 overflow-hidden mb-8">
+          <!-- Glowing border effect -->
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-2xl blur-md opacity-60 -z-10"></div>
+  
+          <!-- Bet Information -->
+          <div class="p-6 md:p-8">
+            <div class="space-y-4">
+              <div class="bg-dark/50 rounded-lg p-3 border border-mypurple/30">
+                <p class="text-xs text-mywhite/70 mb-1">Cote</p>
+                <p class="font-medium">{{ bet.odds }}</p>
+              </div>
+  
+              <div class="bg-dark/50 rounded-lg p-3 border border-mypurple/30">
+                <p class="text-xs text-mywhite/70 mb-1">Mise</p>
+                <input [(ngModel)]="editedStake" type="number" class="w-full bg-transparent border-none focus:outline-none">
+              </div>
+  
+              <div class="bg-dark/50 rounded-lg p-3 border border-mypurple/30">
+                <p class="text-xs text-mywhite/70 mb-1">Gamble ID</p>
+                <p class="font-medium">{{ bet.gamble_id }}</p>
+              </div>
+  
+              <div class="bg-dark/50 rounded-lg p-3 border border-mypurple/30">
+                <p class="text-xs text-mywhite/70 mb-1">Utilisateur ID</p>
+                <p class="font-medium">{{ bet.user_id }}</p>
+              </div>
+            </div>
+  
+            <!-- Action Buttons -->
+            <div class="mt-8 flex justify-center">
+              <button (click)="saveBet()" class="bg-myyellow text-dark font-orbitron font-semibold py-3 px-8 rounded-lg hover:bg-myyellow/90 transition-all duration-200 shadow-glow hover:shadow-glow-hover flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                  <polyline points="17 21 19 19 17 17"></polyline>
+                  <line x1="12" y1="17" x2="12" y2="7"></line>
+                </svg>
+                SAUVEGARDER LE PARI
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Empty State -->
+      <div *ngIf="!bet" class="bg-gradient-to-br from-dark to-mypurple/90 rounded-2xl shadow-xl border border-mypurple/60 p-12 text-center">
+        <div class="text-mypink text-5xl mb-4">🎮</div>
+        <h3 class="text-mywhite font-orbitron text-xl mb-2">Aucun pari trouvé</h3>
+        <p class="text-mywhite/80 mb-6">Veuillez vérifier l'ID du pari</p>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,38 @@
+.match-card {
+  background: var(--color-mywhite);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 460px;
+  margin: 20px auto;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.match-card:hover {
+  transform: scale(1.05);
+}
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.match-sport {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-mypurple);
+}
+
+.match-date,
+.match-time {
+  font-size: 1rem;
+  color: var(--color-mypurple);
+}
+
+.match-details {
+  margin-top: 15px;
+}

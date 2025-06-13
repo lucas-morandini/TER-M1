@@ -1,0 +1,67 @@
+
+
+<div class="min-h-screen bg-darker text-mywhite font-rajdhani">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <div class="relative mb-10 rounded-xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-mypurple/90 to-mypurple/70 mix-blend-multiply"></div>
+      <div class="relative z-10 py-12 px-6 md:px-12">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-orbitron font-bold text-myyellow mb-4">
+          Matchs de la Ligue
+        </h1>
+        <p class="text-lg md:text-xl text-mywhite max-w-2xl">
+          Découvrez tous les matchs à venir et placez vos paris sur vos équipes favorites.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Match List Container -->
+    <div class="relative bg-gradient-to-br from-mypurple/30 to-dark/90 rounded-xl p-6 shadow-lg border border-mypurple/40 mb-8">
+      <!-- Glowing border effect -->
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-30 -z-10"></div>
+      
+      <!-- Header Content -->
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="font-orbitron text-2xl font-bold text-mypink flex items-center">
+          <span class="inline-block w-1.5 h-6 bg-myyellow rounded mr-2.5"></span>
+          Calendrier des Matchs
+        </h2>
+        <div class="bg-dark/70 text-mywhite px-3 py-1 rounded-full text-sm font-medium">
+          {{ matches.length }} {{ matches.length > 1 ? 'matchs' : 'match' }}
+        </div>
+      </div>
+      
+      <!-- Match Grid - Using the existing pair pipe -->
+      <div class="match-list">
+        <div class="match-row grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" *ngFor="let pair of matches | pair">
+          <app-match-card *ngFor="let match of pair" [match]="match"></app-match-card>
+        </div>
+      </div>
+      
+      <!-- Empty State -->
+      <div *ngIf="matches.length === 0" class="py-12 text-center">
+        <div class="text-mypink text-5xl mb-4">🎮</div>
+        <h3 class="text-mywhite font-orbitron text-xl mb-2">Aucun match trouvé</h3>
+        <p class="text-mywhite/80 mb-4">Il n'y a actuellement aucun match programmé pour cette ligue.</p>
+      </div>
+      
+      <!-- Loading State (can be shown conditionally if you add a loading state to your component) -->
+      <div *ngIf="false" class="absolute inset-0 bg-dark/80 rounded-xl flex items-center justify-center">
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 border-4 border-mypink/40 border-t-mypink rounded-full animate-spin mb-4"></div>
+          <p class="text-mywhite font-medium">Chargement des matchs...</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Back Button -->
+    <div class="flex justify-center mt-8">
+      <a [routerLink]="['/leagues']" class="bg-gradient-to-r from-mypurple/80 to-mypink/60 hover:from-mypurple hover:to-mypink text-mywhite font-orbitron font-bold py-3 px-8 rounded-lg transition-all duration-200 transform hover:-translate-y-1 hover:shadow-glow flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+        <span>RETOUR AUX LIGUES</span>
+      </a>
+    </div>
+  </div>
+</div>

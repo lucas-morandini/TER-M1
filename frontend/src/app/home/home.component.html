@@ -1,0 +1,71 @@
+
+
+<div class="min-h-screen bg-dark text-mywhite font-rajdhani">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Hero Section -->
+    <section class="relative h-[300px] md:h-[400px] rounded-b-3xl overflow-hidden mb-8 shadow-xl">
+      <div class="absolute inset-0 bg-gradient-to-b from-mypurple/70 to-dark/90 z-10">
+        <div class="absolute inset-0 bg-[url('/assets/images/esports-hero.jpg')] bg-cover bg-center mix-blend-overlay"></div>
+      </div>
+      <div class="relative z-20 h-full flex flex-col justify-center p-8">
+        <h1 class="font-orbitron text-3xl md:text-5xl font-bold mb-4 text-myyellow uppercase drop-shadow-[0_0_10px_rgba(251,227,0,0.5)]">
+          Epic eSports Betting
+        </h1>
+        <p class="text-lg md:text-xl max-w-2xl mb-8">
+          Place your bets on the biggest eSports matches and tournaments. Follow your favorite teams and win big!
+        </p>
+        <button class="inline-block bg-myyellow text-dark font-orbitron font-semibold py-3 px-8 rounded-full uppercase tracking-wider transition-all duration-300 shadow-glow hover:shadow-glow-hover hover:-translate-y-1 transform" (click)="placeABet()">
+          Place a Bet
+        </button>
+      </div>
+    </section>
+
+<!-- Featured Matches Section -->
+<section class="mb-12">
+  <h2 class="font-orbitron text-2xl font-semibold mb-6 text-mypink uppercase flex items-center">
+    <span class="inline-block w-1.5 h-6 bg-myyellow rounded mr-2.5"></span>
+    Featured Matches
+  </h2>
+
+  <div *ngIf="matchOfTheWeek" class="relative bg-gradient-to-br from-mypurple/30 to-mypink/10 rounded-xl p-6 shadow-lg border border-mypurple/50 overflow-hidden">
+    <!-- Glowing border effect -->
+    <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-70 -z-10"></div>
+    <app-match-card [match]="matchOfTheWeek"></app-match-card>
+  </div>
+
+  <div *ngIf="!matchOfTheWeek" class="relative bg-gradient-to-br from-mypurple/30 to-mypink/10 rounded-xl p-6 shadow-lg border border-mypurple/50 overflow-hidden text-center">
+    <p class="text-mywhite">Aucun match de la semaine disponible pour le moment.</p>
+  </div>
+</section>
+
+
+    <!-- Your Bets Section -->
+    <section class="mb-12">
+      <h2 class="font-orbitron text-2xl font-semibold mb-6 text-mypink uppercase flex items-center">
+        <span class="inline-block w-1.5 h-6 bg-myyellow rounded mr-2.5"></span>
+        Your Active Bets
+      </h2>
+      <div class="relative bg-gradient-to-br from-mypurple/30 to-mypink/10 rounded-xl p-6 shadow-lg border border-mypurple/50 overflow-hidden">
+        <!-- Glowing border effect -->
+        <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-70 -z-10"></div>
+        <app-bet-list [betIds]="betIds"></app-bet-list>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div class="bg-gradient-to-br from-mypurple/40 to-dark/80 rounded-xl p-6 text-center shadow-lg border border-mypurple/50 transition-transform duration-300 hover:-translate-y-1">
+        <div class="font-orbitron text-4xl font-bold text-myyellow mb-2 animate-pulse-slow">24</div>
+        <div class="text-mywhite uppercase tracking-wider text-sm">Live Matches</div>
+      </div>
+      <div class="bg-gradient-to-br from-mypurple/40 to-dark/80 rounded-xl p-6 text-center shadow-lg border border-mypurple/50 transition-transform duration-300 hover:-translate-y-1">
+        <div class="font-orbitron text-4xl font-bold text-myyellow mb-2 animate-pulse-slow">128</div>
+        <div class="text-mywhite uppercase tracking-wider text-sm">Upcoming Events</div>
+      </div>
+      <div class="bg-gradient-to-br from-mypurple/40 to-dark/80 rounded-xl p-6 text-center shadow-lg border border-mypurple/50 transition-transform duration-300 hover:-translate-y-1">
+        <div class="font-orbitron text-4xl font-bold text-myyellow mb-2 animate-pulse-slow">95%</div>
+        <div class="text-mywhite uppercase tracking-wider text-sm">Payout Rate</div>
+      </div>
+    </section>
+  </div>
+</div>

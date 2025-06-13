@@ -1,0 +1,394 @@
+<div class="min-h-screen bg-darker text-mywhite font-rajdhani py-8">
+  <div class="max-w-4xl mx-auto px-4">
+    <!-- Profile Header -->
+    <div class="text-center mb-8">
+      <h1 class="font-orbitron text-3xl md:text-4xl font-bold mb-2 text-myyellow">
+        MODIFIER PROFIL JOUEUR
+      </h1>
+      <p class="text-mywhite/80 text-lg">Modifiez vos informations personnelles</p>
+    </div>
+
+    <!-- Main Content -->
+    <div *ngIf="user" class="relative">
+      <!-- User Card -->
+      <div class="relative bg-gradient-to-br from-dark to-mypurple/90 rounded-2xl shadow-xl border border-mypurple/60 overflow-hidden mb-8">
+        <!-- Glowing border effect -->
+        <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-2xl blur-md opacity-60 -z-10"></div>
+
+        <!-- Profile Header with Avatar -->
+        <div class="relative p-6 md:p-8 pb-0">
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+            <!-- Avatar -->
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-r from-mypink to-myyellow rounded-full blur-md opacity-50"></div>
+              <div class="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-dark/70 border-2 border-mypink/60 overflow-hidden flex items-center justify-center z-10">
+                <span class="text-4xl md:text-5xl font-orbitron text-myyellow">
+                  {{ user.first_name.charAt(0) }}{{ user.name.charAt(0) }}
+                </span>
+              </div>
+            </div>
+
+            <!-- User Name and Balance -->
+            <div class="flex-1 text-center md:text-left">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div>
+                  <h2 class="font-orbitron text-2xl font-bold text-mywhite mb-1">
+                    {{ user.username }}
+                  </h2>
+                  <p class="text-mywhite/80 mb-4">
+                    {{ user.first_name }} {{ user.name }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Balance Card -->
+              <div class="mt-4 bg-mypurple/40 rounded-xl p-4 border border-mypink/40">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div>
+                    <p class="text-mywhite/80 text-sm mb-1">Solde disponible</p>
+                    <p class="font-orbitron text-2xl md:text-3xl font-bold text-myyellow">
+                      {{ user.solde | currency:'EUR':'symbol':'1.2-2' }}
+                    </p>
+                  </div>
+                  <div class="flex gap-2">
+                    <button class="bg-myyellow text-dark font-orbitron font-semibold py-2 px-4 rounded-lg hover:bg-myyellow/90 transition-all duration-200 shadow-glow hover:shadow-glow-hover flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20"></path>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                      </svg>
+                      DÉPOSER
+                    </button>
+                    <button class="bg-dark/70 text-mywhite font-orbitron font-semibold py-2 px-4 rounded-lg hover:bg-dark transition-all duration-200 border border-mypink/40 flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20"></path>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                      </svg>
+                      RETIRER
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="px-6 md:px-8 mt-8">
+          <div class="flex border-b border-mypurple/40">
+            <button class="py-2 px-4 font-orbitron text-myyellow border-b-2 border-myyellow -mb-px">
+              INFORMATIONS
+            </button>
+            <button class="py-2 px-4 font-orbitron text-mywhite/70 hover:text-mywhite transition-colors">
+              HISTORIQUE
+            </button>
+            <button class="py-2 px-4 font-orbitron text-mywhite/70 hover:text-mywhite transition-colors">
+              PARIS
+            </button>
+          </div>
+        </div>
+
+        <!-- User Information Form -->
+        <div class="p-6 md:p-8">
+          <form [formGroup]="profileForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Personal Information -->
+              <div>
+                <h3 class="font-orbitron text-mypink text-lg mb-4 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Informations Personnelles
+                </h3>
+
+                <div class="space-y-4">
+                  <div class="bg-dark/50 rounded-lg p-3 border"
+                       [class]="hasFieldError('name') ? 'border-red-500' : 'border-mypurple/30'">
+                    <p class="text-xs text-mywhite/70 mb-1">Nom *</p>
+                    <input formControlName="name"
+                           class="w-full bg-transparent border-none focus:outline-none text-mywhite"
+                           placeholder="Votre nom">
+                    <div *ngIf="hasFieldError('name')" class="text-xs text-red-400 mt-1">
+                      {{ getFieldError('name') }}
+                    </div>
+                  </div>
+
+                  <div class="bg-dark/50 rounded-lg p-3 border"
+                       [class]="hasFieldError('first_name') ? 'border-red-500' : 'border-mypurple/30'">
+                    <p class="text-xs text-mywhite/70 mb-1">Prénom *</p>
+                    <input formControlName="first_name"
+                           class="w-full bg-transparent border-none focus:outline-none text-mywhite"
+                           placeholder="Votre prénom">
+                    <div *ngIf="hasFieldError('first_name')" class="text-xs text-red-400 mt-1">
+                      {{ getFieldError('first_name') }}
+                    </div>
+                  </div>
+
+                  <div class="bg-dark/50 rounded-lg p-3 border"
+                       [class]="hasFieldError('sex') ? 'border-red-500' : 'border-mypurple/30'">
+                    <p class="text-xs text-mywhite/70 mb-1">Sexe *</p>
+                    <select formControlName="sex"
+                            class="w-full bg-transparent border-none focus:outline-none text-mywhite">
+                      <option value="">Sélectionner</option>
+                      <option value="H">Homme</option>
+                      <option value="F">Femme</option>
+                      <option value="O">Autre</option>
+                    </select>
+                    <div *ngIf="hasFieldError('sex')" class="text-xs text-red-400 mt-1">
+                      {{ getFieldError('sex') }}
+                    </div>
+                  </div>
+
+                  <div class="bg-dark/50 rounded-lg p-3 border"
+                       [class]="hasFieldError('birth_date') ? 'border-red-500' : 'border-mypurple/30'">
+                    <p class="text-xs text-mywhite/70 mb-1">Date de naissance *</p>
+                    <input type="date"
+                           formControlName="birth_date"
+                           class="w-full bg-transparent border-none focus:outline-none text-mywhite">
+                    <div *ngIf="hasFieldError('birth_date')" class="text-xs text-red-400 mt-1">
+                      {{ getFieldError('birth_date') }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Contact Information -->
+              <div>
+                <h3 class="font-orbitron text-mypink text-lg mb-4 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                  Coordonnées
+                </h3>
+
+                <div class="space-y-4">
+                  <div class="bg-dark/50 rounded-lg p-3 border"
+                       [class]="hasFieldError('username') ? 'border-red-500' : 'border-mypurple/30'">
+                    <p class="text-xs text-mywhite/70 mb-1">Nom d'utilisateur *</p>
+                    <input formControlName="username"
+                           class="w-full bg-transparent border-none focus:outline-none text-mywhite"
+                           placeholder="Votre nom d'utilisateur">
+                    <div *ngIf="hasFieldError('username')" class="text-xs text-red-400 mt-1">
+                      {{ getFieldError('username') }}
+                    </div>
+                  </div>
+
+                  <div class="bg-dark/50 rounded-lg p-3 border"
+                       [class]="hasFieldError('email') ? 'border-red-500' : 'border-mypurple/30'">
+                    <p class="text-xs text-mywhite/70 mb-1">Email *</p>
+                    <input type="email"
+                           formControlName="email"
+                           class="w-full bg-transparent border-none focus:outline-none text-mywhite"
+                           placeholder="votre@email.com">
+                    <div *ngIf="hasFieldError('email')" class="text-xs text-red-400 mt-1">
+                      {{ getFieldError('email') }}
+                    </div>
+                  </div>
+
+                  <div class="bg-dark/50 rounded-lg p-3 border"
+                       [class]="hasFieldError('tel') ? 'border-red-500' : 'border-mypurple/30'">
+                    <p class="text-xs text-mywhite/70 mb-1">Téléphone *</p>
+                    <input type="tel"
+                           formControlName="tel"
+                           class="w-full bg-transparent border-none focus:outline-none text-mywhite"
+                           placeholder="Votre numéro de téléphone">
+                    <div *ngIf="hasFieldError('tel')" class="text-xs text-red-400 mt-1">
+                      {{ getFieldError('tel') }}
+                    </div>
+                  </div>
+
+                  <!-- Password Section -->
+                  <div class="bg-dark/50 rounded-lg p-3 border border-mypurple/30">
+                    <p class="text-xs text-mywhite/70 mb-1">Mot de passe</p>
+                    <div class="relative">
+                      <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        value="••••••••"
+                        class="w-full bg-transparent border-none focus:outline-none text-mywhite"
+                        readonly
+                      >
+                      <button
+                        type="button"
+                        (click)="togglePasswordVisibility()"
+                        class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                      >
+                        <svg
+                          *ngIf="!showPassword"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 h-4 text-mypink"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                          <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg
+                          *ngIf="showPassword"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 h-4 text-mypink"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.06M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                          <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      (click)="togglePasswordForm()"
+                      class="text-mypink text-xs hover:text-mypink/80 transition-colors mt-1 flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path>
+                        <path d="M12 16v-4"></path>
+                        <path d="M12 8h.01"></path>
+                      </svg>
+                      {{ showPasswordForm ? 'Annuler' : 'Changer le mot de passe' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Password Change Form -->
+          <div *ngIf="showPasswordForm" class="mt-6 p-4 bg-mypurple/20 rounded-lg border border-mypink/30">
+            <h4 class="font-orbitron text-mypink text-lg mb-4">Changer le mot de passe</h4>
+            <form [formGroup]="passwordForm" class="space-y-4">
+              <div>
+                <label class="block text-xs text-mywhite/70 mb-1">Mot de passe actuel *</label>
+                <input type="password"
+                       formControlName="currentPassword"
+                       class="w-full bg-dark/50 border rounded-lg p-3 text-mywhite focus:outline-none focus:ring-2 focus:ring-mypink"
+                       [class]="hasFieldError('currentPassword', passwordForm) ? 'border-red-500' : 'border-mypurple/30'"
+                       placeholder="Votre mot de passe actuel">
+                <div *ngIf="hasFieldError('currentPassword', passwordForm)" class="text-xs text-red-400 mt-1">
+                  {{ getFieldError('currentPassword', passwordForm) }}
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs text-mywhite/70 mb-1">Nouveau mot de passe *</label>
+                <input type="password"
+                       formControlName="newPassword"
+                       class="w-full bg-dark/50 border rounded-lg p-3 text-mywhite focus:outline-none focus:ring-2 focus:ring-mypink"
+                       [class]="hasFieldError('newPassword', passwordForm) ? 'border-red-500' : 'border-mypurple/30'"
+                       placeholder="Votre nouveau mot de passe">
+
+                <!-- Password Requirements -->
+                <div *ngIf="getPasswordErrors()" class="mt-2 p-2 bg-dark/30 rounded-lg border border-mypurple/30">
+                  <div class="text-xs text-mywhite/80 mb-1">Votre mot de passe doit contenir :</div>
+                  <div class="space-y-1 text-xs">
+                    <div class="flex items-center space-x-2">
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasUpperCase'] ? 'text-green-400' : 'text-red-400'">
+                        {{ getPasswordErrors() && !getPasswordErrors()!['hasUpperCase'] ? '✓' : '✗' }}
+                      </span>
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasUpperCase'] ? 'text-green-400' : 'text-mywhite/60'">
+                        Au moins une majuscule
+                      </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasLowerCase'] ? 'text-green-400' : 'text-red-400'">
+                        {{ getPasswordErrors() && !getPasswordErrors()!['hasLowerCase'] ? '✓' : '✗' }}
+                      </span>
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasLowerCase'] ? 'text-green-400' : 'text-mywhite/60'">
+                        Au moins une minuscule
+                      </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasNumeric'] ? 'text-green-400' : 'text-red-400'">
+                        {{ getPasswordErrors() && !getPasswordErrors()!['hasNumeric'] ? '✓' : '✗' }}
+                      </span>
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasNumeric'] ? 'text-green-400' : 'text-mywhite/60'">
+                        Au moins un chiffre
+                      </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasSpecialChar'] ? 'text-green-400' : 'text-red-400'">
+                        {{ getPasswordErrors() && !getPasswordErrors()!['hasSpecialChar'] ? '✓' : '✗' }}
+                      </span>
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasSpecialChar'] ? 'text-green-400' : 'text-mywhite/60'">
+                        Au moins un caractère spécial
+                      </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['isValidLength'] ? 'text-green-400' : 'text-red-400'">
+                        {{ getPasswordErrors() && !getPasswordErrors()!['isValidLength'] ? '✓' : '✗' }}
+                      </span>
+                      <span [class]="getPasswordErrors() && !getPasswordErrors()!['isValidLength'] ? 'text-green-400' : 'text-mywhite/60'">
+                        Au moins 8 caractères
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs text-mywhite/70 mb-1">Confirmer le nouveau mot de passe *</label>
+                <input type="password"
+                       formControlName="confirmPassword"
+                       class="w-full bg-dark/50 border rounded-lg p-3 text-mywhite focus:outline-none focus:ring-2 focus:ring-mypink"
+                       [class]="hasPasswordMismatch() ? 'border-red-500' : 'border-mypurple/30'"
+                       placeholder="Confirmez votre nouveau mot de passe">
+                <div *ngIf="hasPasswordMismatch()" class="text-xs text-red-400 mt-1">
+                  Les mots de passe ne correspondent pas
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <button
+                  type="button"
+                  (click)="changePassword()"
+                  [disabled]="passwordForm.invalid"
+                  class="bg-myyellow text-dark font-orbitron font-semibold py-2 px-4 rounded-lg hover:bg-myyellow/90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                  MODIFIER LE MOT DE PASSE
+                </button>
+                <button
+                  type="button"
+                  (click)="togglePasswordForm()"
+                  class="bg-dark/70 text-mywhite font-orbitron font-semibold py-2 px-4 rounded-lg hover:bg-dark transition-all duration-200 border border-mypink/40">
+                  ANNULER
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="mt-8 flex justify-center">
+            <button
+              type="button"
+              class="bg-myyellow text-dark font-orbitron font-semibold py-3 px-8 rounded-lg hover:bg-myyellow/90 transition-all duration-200 shadow-glow hover:shadow-glow-hover flex items-center"
+              [disabled]="profileForm.invalid"
+              (click)="SaveData()"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 19 19 17 17"></polyline>
+                <line x1="12" y1="17" x2="12" y2="7"></line>
+              </svg>
+              SAUVEGARDER LES MODIFICATIONS
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!user" class="bg-gradient-to-br from-dark to-mypurple/90 rounded-2xl shadow-xl border border-mypurple/60 p-12 text-center">
+      <div class="text-mypink text-5xl mb-4">🎮</div>
+      <h3 class="text-mywhite font-orbitron text-xl mb-2">Aucune information utilisateur disponible</h3>
+      <p class="text-mywhite/80 mb-6">Veuillez vous connecter pour accéder à votre profil</p>
+      <button class="bg-myyellow text-dark font-orbitron font-semibold py-3 px-8 rounded-lg hover:bg-myyellow/90 transition-all duration-200 shadow-glow hover:shadow-glow-hover">
+        SE CONNECTER
+      </button>
+    </div>
+  </div>
+</div>

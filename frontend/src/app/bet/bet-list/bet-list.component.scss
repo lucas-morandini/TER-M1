@@ -1,0 +1,30 @@
+.bet-list-container {
+    background-color: theme('colors.mypurple'); // Fond violet
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .bet-list-title {
+    color: theme('colors.mywhite'); // Texte blanc
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .bet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .bet-card-wrapper {
+    background-color: theme('colors.myyellow'); // Fond jaune pour chaque carte
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  

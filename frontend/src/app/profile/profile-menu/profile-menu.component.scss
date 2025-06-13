@@ -1,0 +1,27 @@
+.profile-menu {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: bold;
+      transition: all 0.3s ease;
+  
+      &:hover {
+        background-color: rgba(139, 92, 246, 0.6);
+        color: #fbe300;
+      }
+    }
+  }
+  

@@ -1,0 +1,111 @@
+
+<div class="min-h-screen bg-dark text-mywhite font-rajdhani">
+  
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <div class="relative mb-10 rounded-xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-mypurple to-mypurple/70 mix-blend-multiply"></div>
+      <div class="relative z-10 py-12 px-6 md:px-12">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-orbitron font-bold text-myyellow mb-4">
+          Ligues eSports
+        </h1>
+        <p class="text-lg md:text-xl text-mywhite/90 max-w-2xl">
+          Découvrez les meilleures ligues eSports du monde et placez vos paris sur les matchs à venir.
+        </p>
+      </div>
+    </div>
+
+    <!-- Search and Filter Bar -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+      <!-- Search -->
+      <div class="relative w-full md:w-auto md:min-w-[300px]">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-mypink">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </div>
+        <input
+          type="search"
+          placeholder="Rechercher une ligue..."
+          class="bg-dark/50 border border-mypurple/50 text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-2.5 placeholder-mywhite/50"
+        >
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-2 w-full md:w-auto">
+        <select class="bg-dark/50 border border-mypurple/50 text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink p-2.5">
+          <option value="">Toutes les régions</option>
+          <option value="EU">Europe</option>
+          <option value="NA">Amérique du Nord</option>
+          <option value="ASIA">Asie</option>
+        </select>
+        <select class="bg-dark/50 border border-mypurple/50 text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink p-2.5">
+          <option value="">Tous les jeux</option>
+          <option value="LOL">League of Legends</option>
+          <option value="DOTA">Dota 2</option>
+          <option value="CSGO">CS:GO</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- League Grid -->
+    <div class="relative bg-gradient-to-br from-mypurple/20 to-dark/80 rounded-xl p-6 shadow-lg border border-mypurple/30">
+      <!-- Glowing border effect -->
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-20 -z-10"></div>
+
+      <!-- Grid Header -->
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="font-orbitron text-2xl font-bold text-mypink flex items-center">
+          <span class="inline-block w-1.5 h-6 bg-myyellow rounded mr-2.5"></span>
+          Ligues Populaires
+        </h2>
+        <div class="text-sm text-mywhite/70">
+          {{ leagues.length || 0 }} ligues trouvées
+        </div>
+      </div>
+
+      <!-- League Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let league of leagues">
+          <app-league-card [leagueId]="league.id.toString()"></app-league-card>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!leagues || leagues.length === 0" class="py-12 text-center">
+        <div class="text-mypink text-5xl mb-4">🎮</div>
+        <h3 class="text-mywhite font-orbitron text-xl mb-2">Aucune ligue trouvée</h3>
+        <p class="text-mywhite/70 mb-4">Essayez de modifier vos filtres de recherche</p>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="absolute inset-0 bg-dark/50 rounded-xl flex items-center justify-center">
+        <div class="flex flex-col items-center">
+          <div class="w-12 h-12 border-4 border-mypink/30 border-t-mypink rounded-full animate-spin mb-4"></div>
+          <p class="text-mywhite font-medium">Chargement des ligues...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center mt-8">
+      <nav class="flex items-center space-x-2">
+        <button class="px-3 py-1 rounded-md bg-mypurple/40 text-mywhite/70 hover:bg-mypurple/60 hover:text-mywhite transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"></path>
+          </svg>
+        </button>
+        <button class="px-3 py-1 rounded-md bg-mypurple/80 text-mywhite">1</button>
+        <button class="px-3 py-1 rounded-md bg-mypurple/40 text-mywhite/70 hover:bg-mypurple/60 hover:text-mywhite transition-colors">2</button>
+        <button class="px-3 py-1 rounded-md bg-mypurple/40 text-mywhite/70 hover:bg-mypurple/60 hover:text-mywhite transition-colors">3</button>
+        <button class="px-3 py-1 rounded-md bg-mypurple/40 text-mywhite/70 hover:bg-mypurple/60 hover:text-mywhite transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"></path>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </div>
+</div>

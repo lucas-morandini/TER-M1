@@ -1,0 +1,57 @@
+<!-- Notification Content -->
+<div class="p-6" *ngIf="data.notification as notif">
+  <!-- Tu peux maintenant utiliser `notif` en toute sécurité -->
+  <div class="text-center mb-6">
+    <div *ngIf="notif.soldeUpdate > 0" class="relative mb-4">
+      ...
+    </div>
+    <div *ngIf="notif.soldeUpdate < 0" class="relative mb-4">
+      ...
+    </div>
+    <div *ngIf="notif.soldeUpdate === 0" class="relative mb-4">
+      ...
+    </div>
+
+    <h2 class="font-orbitron text-xl font-bold text-myyellow mb-2">
+      {{ notif.title || 'Notification' }}
+    </h2>
+
+    <p class="text-sm font-medium"
+       [ngClass]="{
+         'text-green-400': notif.soldeUpdate > 0,
+         'text-red-400': notif.soldeUpdate < 0,
+         'text-mypink': notif.soldeUpdate === 0
+       }">
+      <span *ngIf="notif.soldeUpdate > 0">💰 Solde augmenté</span>
+      <span *ngIf="notif.soldeUpdate < 0">📉 Solde diminué</span>
+      <span *ngIf="notif.soldeUpdate === 0">ℹ️ Information</span>
+    </p>
+  </div>
+
+  <div class="bg-dark/50 rounded-lg p-4 border border-mypurple/40 mb-6">
+    <p class="text-mywhite text-center leading-relaxed">
+      {{ notif.message }}
+    </p>
+  </div>
+
+  <div *ngIf="notif.soldeUpdate !== 0"
+       class="bg-mypurple/30 rounded-lg p-4 border border-mypink/40 mb-6">
+    <div class="flex justify-between items-center">
+      <span class="text-mywhite/90 font-medium">Variation du solde:</span>
+      <span class="font-orbitron text-xl font-bold"
+            [ngClass]="{
+              'text-green-400': notif.soldeUpdate > 0,
+              'text-red-400': notif.soldeUpdate < 0
+            }">
+        <span *ngIf="notif.soldeUpdate > 0">+</span>{{ notif.soldeUpdate | currency:'EUR':'symbol':'1.2-2' }}
+      </span>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button (click)="closeModal()"
+            class="bg-myyellow text-dark font-orbitron font-semibold py-3 px-8 rounded-lg hover:bg-myyellow/90 transition-all duration-300 transform hover:-translate-y-1 shadow-glow hover:shadow-glow-hover">
+      COMPRIS
+    </button>
+  </div>
+</div>

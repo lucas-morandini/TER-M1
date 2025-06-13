@@ -1,0 +1,35 @@
+.match-basic {
+    background: var(--color-mywhite);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .match-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .match-sport {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-mypurple);
+  }
+  
+  .match-date,
+  .match-time {
+    font-size: 1rem;
+    color: var(--color-mypurple);
+  }
+  
+  .bet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  

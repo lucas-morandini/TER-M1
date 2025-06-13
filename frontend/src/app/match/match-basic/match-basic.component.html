@@ -1,0 +1,216 @@
+<div class="min-h-screen bg-darker text-mywhite font-rajdhani">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Match Header -->
+    <div class="relative mb-8 rounded-xl overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-mypurple/90 to-mypurple/70 mix-blend-multiply"></div>
+      <div class="relative z-10 py-8 px-6 md:px-12">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h1 class="text-2xl md:text-3xl font-orbitron font-bold text-myyellow mb-2">
+              Détails du Match
+            </h1>
+            <p class="text-lg text-mywhite/90 mb-2">Match ID: {{ matchId }}</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-mypurple/60 px-3 py-1 rounded-full text-sm">BO{{ match?.bestOf || '?' }}</span>
+              <span class="bg-mypurple/60 px-3 py-1 rounded-full text-sm">{{ match?.state || 'État inconnu' }}</span>
+            </div>
+          </div>
+          
+          <div class="text-right">
+            <div class="flex items-center text-mywhite/90 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-myyellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                <line x1="16" x2="16" y1="2" y2="6"></line>
+                <line x1="8" x2="8" y1="2" y2="6"></line>
+                <line x1="3" x2="21" y1="10" y2="10"></line>
+              </svg>
+              {{ match?.startDate | date:'medium' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Match Content -->
+    <div class="relative bg-gradient-to-br from-mypurple/30 to-dark/90 rounded-2xl p-8 shadow-xl border border-mypurple/40 mb-8">
+      <!-- Glowing border effect -->
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-2xl blur-md opacity-40 -z-10"></div>
+      
+      <!-- Teams Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center mb-8">
+        <!-- Team 1 -->
+        <div class="text-center">
+          <div class="relative mb-6 mx-auto w-32 h-32 bg-dark/50 rounded-full p-4 flex items-center justify-center border-2 border-mypurple/60">
+            <div class="absolute inset-0 bg-gradient-to-r from-mypurple to-mypink rounded-full blur-md opacity-30"></div>
+            <img *ngIf="match?.teams?.[0]?.image" 
+                 [src]="match.teams[0].image" 
+                 [alt]="match.teams[0].name" 
+                 class="relative max-w-full max-h-full object-contain z-10"
+                 onerror="this.src='assets/images/default-team.png'">
+            <div *ngIf="!match?.teams?.[0]?.image" class="relative text-mypink text-5xl z-10">
+              {{ match?.teams?.[0]?.name?.charAt(0) || 'T1' }}
+            </div>
+          </div>
+          
+          <h2 class="font-orbitron text-2xl font-bold text-mywhite mb-2">
+            {{ match?.teams?.[0]?.name || 'Équipe 1' }}
+          </h2>
+          
+          <!-- Betting Button -->
+          <button *ngIf="match?.isBettable !== false"
+          (click)="redirectToEditGamble(gamble1.id)"
+          class="bg-gradient-to-r from-mypurple/80 to-mypink/60 hover:from-mypurple hover:to-mypink text-mywhite font-orbitron font-bold py-2 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-glow">
+        <span class="text-xs opacity-80">COTE</span>
+        <span class="block text-myyellow text-xl">{{ gamble1?.odds || '0.00' }}</span>
+      </button>
+          
+          <div *ngIf="!match?.isBettable" class="text-mywhite/60 text-sm mt-2">
+            Paris fermés
+          </div>
+        </div>
+
+        <!-- VS Section -->
+        <div class="text-center">
+          <div class="relative w-20 h-20 bg-mypurple/40 rounded-full flex items-center justify-center border-2 border-mypink/60 mx-auto mb-4">
+            <span class="font-orbitron text-myyellow font-bold text-2xl">VS</span>
+          </div>
+          
+          <div class="h-px w-full bg-gradient-to-r from-transparent via-mypink/60 to-transparent mb-4"></div>
+          
+          <div *ngIf="match?.state === 'LIVE'" class="inline-flex items-center bg-green-500/20 text-green-400 px-4 py-2 rounded-full font-orbitron font-bold">
+            <span class="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+            EN DIRECT
+          </div>
+          
+          <div *ngIf="match?.state === 'UPCOMING'" class="text-mywhite/80">
+            <p class="text-sm">À venir</p>
+            <p class="font-orbitron text-mypink font-bold">{{ match.startDate | date:'short' }}</p>
+          </div>
+          
+          <div *ngIf="match?.state === 'FINISHED'" class="text-mywhite/80">
+            <p class="text-sm">Match terminé</p>
+            <p class="font-orbitron text-mypink font-bold">{{ match.startDate | date:'short' }}</p>
+          </div>
+        </div>
+
+        <!-- Team 2 -->
+        <div class="text-center">
+          <div class="relative mb-6 mx-auto w-32 h-32 bg-dark/50 rounded-full p-4 flex items-center justify-center border-2 border-mypurple/60">
+            <div class="absolute inset-0 bg-gradient-to-r from-mypink to-mypurple rounded-full blur-md opacity-30"></div>
+            <img *ngIf="match?.teams?.[1]?.image" 
+                 [src]="match.teams[1].image" 
+                 [alt]="match.teams[1].name" 
+                 class="relative max-w-full max-h-full object-contain z-10"
+                 onerror="this.src='assets/images/default-team.png'">
+            <div *ngIf="!match?.teams?.[1]?.image" class="relative text-mypink text-5xl z-10">
+              {{ match?.teams?.[1]?.name?.charAt(0) || 'T2' }}
+            </div>
+          </div>
+          
+          <h2 class="font-orbitron text-2xl font-bold text-mywhite mb-2">
+            {{ match?.teams?.[1]?.name || 'Équipe 2' }}
+          </h2>
+          
+          <!-- Betting Button -->
+          <button *ngIf="match?.isBettable !== false"
+          (click)="redirectToEditGamble(gamble2.id)"
+          class="bg-gradient-to-r from-mypurple/80 to-mypink/60 hover:from-mypurple hover:to-mypink text-mywhite font-orbitron font-bold py-2 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-glow">
+        <span class="text-xs opacity-80">COTE</span>
+        <span class="block text-myyellow text-xl">{{ gamble2?.odds || '0.00' }}</span>
+      </button>
+          
+          <div *ngIf="!match?.isBettable" class="text-mywhite/60 text-sm mt-2">
+            Paris fermés
+          </div>
+        </div>
+      </div>
+
+      <!-- Betting Close Time Warning -->
+      <div *ngIf="match?.betCloseTime && match?.isBettable" 
+           class="bg-mypurple/30 rounded-xl p-4 border border-mypink/40 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-mypink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 2h4"></path>
+          <path d="M12 14v-4"></path>
+          <path d="M4 13a8 8 0 0 1 8-7 8 8 0 1 1-5.3 14L4 17.6"></path>
+          <path d="M9 17H4v5"></path>
+        </svg>
+        <span class="text-mywhite/90">
+          <strong>Attention:</strong> Les paris ferment le {{ match.betCloseTime | date:'medium' }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Games/Maps Section -->
+    <div *ngIf="match?.games && match.games.length > 0" 
+         class="relative bg-gradient-to-br from-mypurple/30 to-dark/90 rounded-xl p-6 shadow-lg border border-mypurple/40 mb-8">
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-30 -z-10"></div>
+      
+      <h3 class="font-orbitron text-xl font-bold text-mypink mb-4 flex items-center">
+        <span class="inline-block w-1.5 h-6 bg-myyellow rounded mr-2.5"></span>
+        Maps / Games (BO{{ match.bestOf }})
+      </h3>
+      
+
+
+    <!-- Match Statistics -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-gradient-to-br from-mypurple/50 to-dark/90 rounded-xl p-6 text-center shadow-lg border border-mypurple/50">
+        <div class="font-orbitron text-3xl font-bold text-myyellow mb-2">{{ match?.bestOf || 'N/A' }}</div>
+        <div class="text-mywhite uppercase tracking-wider text-sm">Best of</div>
+      </div>
+      
+      <div class="bg-gradient-to-br from-mypurple/50 to-dark/90 rounded-xl p-6 text-center shadow-lg border border-mypurple/50">
+        <div class="font-orbitron text-3xl font-bold text-myyellow mb-2">{{ match?.games?.length || 0 }}</div>
+        <div class="text-mywhite uppercase tracking-wider text-sm">Games Programmés</div>
+      </div>
+    </div>
+
+    <!-- Bets Section -->
+    <div class="relative bg-gradient-to-br from-mypurple/30 to-dark/90 rounded-xl p-6 shadow-lg border border-mypurple/40 mb-8">
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-30 -z-10"></div>
+      
+      <h3 class="font-orbitron text-xl font-bold text-mypink mb-4 flex items-center">
+        <span class="inline-block w-1.5 h-6 bg-myyellow rounded mr-2.5"></span>
+        Paris associés
+      </h3>
+      
+      <app-bet-list [betIds]="betsId"></app-bet-list>
+    </div>
+
+    <!-- Winner/Loser Section (if match is finished) -->
+    <div *ngIf="match?.state === 'FINISHED' && match?.winner" 
+         class="relative bg-gradient-to-br from-mypurple/30 to-dark/90 rounded-xl p-6 shadow-lg border border-mypurple/40 mb-8">
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-30 -z-10"></div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-myyellow/20 rounded-lg p-4 border border-myyellow/50">
+          <h4 class="font-orbitron text-myyellow text-lg font-bold mb-2">Vainqueur</h4>
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-dark/50 rounded-full p-1 flex items-center justify-center border border-mypurple/40 mr-3">
+              <img *ngIf="match.winner.image" 
+                   [src]="match.winner.image" 
+                   [alt]="match.winner.name" 
+                   class="max-w-full max-h-full object-contain"
+                   onerror="this.src='assets/images/default-team.png'">
+            </div>
+            <span class="font-semibold text-mywhite">{{ match.winner.name }}</span>
+          </div>
+        </div>
+        
+        <div *ngIf="match.loser" class="bg-dark/50 rounded-lg p-4 border border-mypurple/30">
+          <h4 class="font-orbitron text-mywhite/80 text-lg font-bold mb-2">Perdant</h4>
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-dark/50 rounded-full p-1 flex items-center justify-center border border-mypurple/40 mr-3">
+              <img *ngIf="match.loser.image" 
+                   [src]="match.loser.image" 
+                   [alt]="match.loser.name" 
+                   class="max-w-full max-h-full object-contain"
+                   onerror="this.src='assets/images/default-team.png'">
+            </div>
+            <span class="font-semibold text-mywhite/80">{{ match.loser.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

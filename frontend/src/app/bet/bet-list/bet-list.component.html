@@ -1,0 +1,40 @@
+<div class="relative bg-gradient-to-br from-mypurple to-mypurple/80 rounded-xl shadow-lg border border-mypink/30 p-6 max-w-4xl mx-auto">
+  <!-- Glowing border effect -->
+  <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-30 -z-10"></div>
+  
+  <!-- Header with title and counter -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="font-orbitron text-2xl font-bold text-mywhite flex items-center">
+      <span class="inline-block w-1.5 h-6 bg-myyellow rounded mr-2.5"></span>
+      Liste des Paris
+    </h2>
+    <div class="bg-dark/50 text-mywhite px-3 py-1 rounded-full text-sm font-medium">
+      {{ bets.length }} {{ bets.length > 1 ? 'paris' : 'pari' }}
+    </div>
+  </div>
+  
+  <!-- Empty state -->
+  <div *ngIf="bets.length === 0" class="bg-dark/30 rounded-lg p-8 text-center">
+    <div class="text-mypink text-5xl mb-4">🎮</div>
+    <h3 class="text-mywhite font-orbitron text-xl mb-2">Aucun pari pour le moment</h3>
+    <p class="text-mywhite/70 mb-4">Placez votre premier pari pour commencer à gagner!</p>
+    <button class="bg-myyellow text-dark font-medium py-2 px-6 rounded-md hover:bg-myyellow/90 transition-colors">
+      Placer un pari
+    </button>
+  </div>
+  
+  <!-- Bet list grid -->
+  <div *ngIf="bets.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div *ngFor="let bet of bets" class="transform transition-all duration-300 hover:scale-[1.02]">
+      <app-bet-card [id]="bet.id"></app-bet-card>
+    </div>
+  </div>
+  
+  <!-- Loading state (optional) -->
+  <div *ngIf="isLoading" class="absolute inset-0 bg-dark/50 rounded-xl flex items-center justify-center">
+    <div class="flex flex-col items-center">
+      <div class="w-12 h-12 border-4 border-mypink/30 border-t-mypink rounded-full animate-spin mb-4"></div>
+      <p class="text-mywhite font-medium">Chargement des paris...</p>
+    </div>
+  </div>
+</div>

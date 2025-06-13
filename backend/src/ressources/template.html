@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réinitialisation de votre mot de passe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap');
+        
+        /* Styles de base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background-color: #12121e;
+            color: #f5f5f5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Pour assurer la compatibilité avec les clients mail */
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        
+        img {
+            border: 0;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+        }
+        
+        /* Conteneur principal */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #1a1a2e;
+        }
+        
+        /* En-tête */
+        .header {
+            background: linear-gradient(to right, #4c2882, rgba(76, 40, 130, 0.9));
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(200, 107, 250, 0.4);
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fbe300;
+            text-shadow: 0 0 10px rgba(251, 227, 0, 0.5);
+            margin: 0;
+        }
+        
+        .logo span {
+            color: #f5f5f5;
+        }
+        
+        /* Contenu */
+        .content {
+            padding: 30px 20px;
+            background: linear-gradient(to bottom, #1a1a2e, rgba(76, 40, 130, 0.3));
+        }
+        
+        .greeting {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #f5f5f5;
+        }
+        
+        .message {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: rgba(245, 245, 245, 0.9);
+        }
+        
+        /* Bouton de réinitialisation */
+        .reset-button-container {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .reset-button {
+            display: inline-block;
+            background: linear-gradient(to right, #fbe300, rgba(251, 227, 0, 0.9));
+            color: #1a1a2e;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(251, 227, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Instructions supplémentaires */
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(76, 40, 130, 0.4);
+            border-radius: 10px;
+            border: 1px solid rgba(200, 107, 250, 0.4);
+        }
+        
+        .instructions-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #c86bfa;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        /* Pied de page */
+        .footer {
+            background-color: rgba(26, 26, 46, 0.9);
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(200, 107, 250, 0.4);
+        }
+        
+        .contact-info {
+            font-size: 14px;
+            color: rgba(245, 245, 245, 0.8);
+            margin-bottom: 15px;
+        }
+        
+        .help-link {
+            color: #c86bfa;
+            text-decoration: none;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-icon {
+            display: inline-block;
+            margin: 0 10px;
+            width: 32px;
+            height: 32px;
+            background-color: rgba(76, 40, 130, 0.6);
+            border-radius: 50%;
+            padding: 5px;
+            text-align: center;
+            line-height: 32px;
+        }
+        
+        .signature {
+            font-size: 16px;
+            color: rgba(245, 245, 245, 0.9);
+            margin-top: 20px;
+        }
+        
+        .company-name {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            color: #fbe300;
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+            
+            .content, .header, .footer {
+                padding: 15px !important;
+            }
+            
+            .reset-button {
+                padding: 12px 20px !important;
+                font-size: 14px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" class="email-container">
+        <!-- En-tête -->
+        <tr>
+            <td class="header">
+                <h1 class="logo">BET<span>ESPORTS</span></h1>
+            </td>
+        </tr>
+        
+        <!-- Contenu principal -->
+        <tr>
+            <td class="content">
+                <p class="greeting">Bonjour {{first_name}},</p>
+                
+                <p class="message">
+                    Nous avons reçu une demande de réinitialisation du mot de passe pour votre compte BetEsports. 
+                    Pour sécuriser votre compte, veuillez cliquer sur le bouton ci-dessous pour créer un nouveau mot de passe.
+                </p>
+                
+                <!-- Bouton de réinitialisation -->
+                <div class="reset-button-container">
+                    <a href="{{reset_link}}" class="reset-button">Réinitialiser mon mot de passe</a>
+                </div>
+                
+                <p class="message">
+                    Ce lien expirera dans 24 heures. Après cette période, vous devrez faire une nouvelle demande de réinitialisation.
+                </p>
+                
+                <!-- Instructions supplémentaires -->
+                <div class="instructions">
+                    <h3 class="instructions-title">Vous n'avez pas demandé cette réinitialisation?</h3>
+                    <p style="color: rgba(245, 245, 245, 0.9); margin-bottom: 0;">
+                        Si vous n'avez pas demandé à réinitialiser votre mot de passe, veuillez ignorer cet e-mail ou 
+                        <a href="#" class="help-link">contacter notre équipe de support</a> immédiatement si vous pensez 
+                        que votre compte a été compromis.
+                    </p>
+                </div>
+            </td>
+        </tr>
+        
+        <!-- Pied de page -->
+        <tr>
+            <td class="footer">
+                <p class="contact-info">
+                    BetEsports SAS • 123 Avenue des Champions • 75001 Paris, France<br>
+                    <a href="mailto:support@betesports.com" class="help-link">support@betesports.com</a> • 
+                    <a href="https://www.betesports.com/aide" class="help-link">Centre d'aide</a>
+                </p>
+                
+                <!-- Réseaux sociaux -->
+                <div class="social-links">
+                    <a href="#" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/128/733/733547.png" width="20" height="20" alt="Facebook" style="vertical-align: middle;">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/128/733/733579.png" width="20" height="20" alt="Twitter" style="vertical-align: middle;">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/128/3670/3670125.png" width="20" height="20" alt="Instagram" style="vertical-align: middle;">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/128/3670/3670157.png" width="20" height="20" alt="Twitch" style="vertical-align: middle;">
+                    </a>
+                </div>
+                
+                <!-- Signature -->
+                <p class="signature">
+                    Cordialement,<br>
+                    L'équipe <span class="company-name">BetEsports</span>
+                </p>
+                
+                <!-- Mentions légales -->
+                <p style="font-size: 12px; color: rgba(245, 245, 245, 0.6); margin-top: 20px;">
+                    Cet e-mail a été envoyé à {{email}}. Si vous ne souhaitez plus recevoir nos e-mails, 
+                    <a href="#" style="color: #c86bfa;">cliquez ici pour vous désabonner</a>.
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

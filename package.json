@@ -1,0 +1,35 @@
+{
+  "name": "ter-m1",
+  "version": "1.0.0",
+  "description": "To make it easy for you to get started with GitLab, here's a list of recommended next steps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "docker build -t docker_ter_m1 .",
+    "run": "docker run -d -p 3000:3000 --name conteneur_ter_m1 docker_ter_m1",
+    "slave": "docker build -t docker_ter_m1 . && docker rm -f conteneur_ter_m1 && docker run -d -p 3000:3000 --name conteneur_ter_m1 docker_ter_m1",
+    "start": "node backend/src/server.js",
+    "compile": "cd backend && npx tsc && cd ..",
+    "dev": "nodemon --config backend/nodemon.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/typeorm": "^11.0.0",
+    "@stripe/stripe-js": "^7.3.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.14.1",
+    "sequelize": "^6.37.5",
+    "swagger": "^0.7.5",
+    "ter-m1": "file:",
+    "typeorm": "^0.3.24"
+  }
+}

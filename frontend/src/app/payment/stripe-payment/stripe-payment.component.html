@@ -1,0 +1,122 @@
+<div class="min-h-screen bg-darker text-mywhite font-rajdhani py-8">
+    <div class="max-w-md mx-auto px-4">
+      <!-- Payment Header -->
+      <div class="text-center mb-8">
+        <h1 class="font-orbitron text-3xl font-bold mb-2 text-myyellow">
+          DÉPÔT DE FONDS
+        </h1>
+        <p class="text-mywhite/80">Alimentez votre compte pour commencer à parier</p>
+      </div>
+  
+      <!-- Payment Card -->
+      <div class="relative">
+        <!-- Card Container -->
+        <div class="relative bg-gradient-to-br from-dark to-mypurple/90 rounded-2xl shadow-xl border border-mypurple/60 overflow-hidden">
+          <!-- Glowing border effect -->
+          <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-2xl blur-md opacity-60 -z-10"></div>
+          
+          <!-- Stripe Logo -->
+          <div class="p-6 pb-0 flex justify-center">
+            <div class="bg-dark/50 rounded-xl p-3 inline-flex items-center border border-mypurple/40">
+              <svg class="h-8" viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg">
+                <path d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.02-13.17 4.02-.86v3.54h3.14V9.1h-3.14v5.85zm-4.91.7c0 2.97-2.31 4.66-5.73 4.66a11.2 11.2 0 0 1-4.46-.93v-3.93c1.38.75 3.1 1.31 4.46 1.31.92 0 1.53-.24 1.53-1C6.26 13.77 0 14.51 0 9.95 0 7.04 2.28 5.3 5.62 5.3c1.36 0 2.72.2 4.09.75v3.88a9.23 9.23 0 0 0-4.1-1.06c-.86 0-1.44.25-1.44.9 0 1.85 6.29.97 6.29 5.88z" fill="#f5f5f5" fill-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          
+          <!-- Payment Form -->
+          <div class="p-6">
+            <div class="mb-6">
+              <label class="block text-mywhite font-medium mb-2">Montant à déposer</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-myyellow font-bold">
+                  $
+                </div>
+                <input 
+                  [(ngModel)]="stripeAmount" 
+                  type="number" 
+                  required
+                  class="bg-dark/70 border border-mypurple/60 text-mywhite text-xl font-orbitron rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-4 placeholder-mywhite/60"
+                  placeholder="0.00"
+                >
+              </div>
+              <div class="mt-2 flex justify-between">
+                <button class="text-myyellow text-sm hover:text-myyellow/90 transition-colors" (click)="stripeAmount = 10">$10</button>
+                <button class="text-myyellow text-sm hover:text-myyellow/90 transition-colors" (click)="stripeAmount = 25">$25</button>
+                <button class="text-myyellow text-sm hover:text-myyellow/90 transition-colors" (click)="stripeAmount = 50">$50</button>
+                <button class="text-myyellow text-sm hover:text-myyellow/90 transition-colors" (click)="stripeAmount = 100">$100</button>
+              </div>
+            </div>
+            
+            <!-- Payment Method Selection -->
+            <div class="mb-6">
+              <label class="block text-mywhite font-medium mb-2">Méthode de paiement</label>
+              <div class="bg-dark/50 rounded-lg p-3 border border-mypurple/40 flex items-center">
+                <div class="flex-1">
+                  <div class="flex items-center">
+                    <div class="w-6 h-6 bg-mypurple/60 rounded-full flex items-center justify-center mr-3">
+                      <div class="w-3 h-3 bg-myyellow rounded-full"></div>
+                    </div>
+                    <span>Carte de crédit</span>
+                  </div>
+                </div>
+                <div class="flex space-x-1">
+                  <div class="w-8 h-5 bg-dark/70 rounded border border-mypurple/40 flex items-center justify-center">
+                    <svg class="w-5 h-3" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H22C23.1 16 24 15.1 24 14V2C24 0.9 23.1 0 22 0Z" fill="#252525"/>
+                      <path d="M9.58 6.12C9.58 7.15 8.76 7.97 7.73 7.97C6.7 7.97 5.88 7.15 5.88 6.12C5.88 5.09 6.7 4.27 7.73 4.27C8.76 4.27 9.58 5.09 9.58 6.12Z" fill="#EB001B"/>
+                      <path d="M18.12 6.12C18.12 7.15 17.3 7.97 16.27 7.97C15.24 7.97 14.42 7.15 14.42 6.12C14.42 5.09 15.24 4.27 16.27 4.27C17.3 4.27 18.12 5.09 18.12 6.12Z" fill="#F79E1B"/>
+                      <path d="M12 3.76C13.05 4.44 13.75 5.69 13.75 7.09C13.75 8.5 13.05 9.75 12 10.42C10.95 9.75 10.25 8.5 10.25 7.09C10.25 5.69 10.95 4.44 12 3.76Z" fill="#FF5F00"/>
+                    </svg>
+                  </div>
+                  <div class="w-8 h-5 bg-dark/70 rounded border border-mypurple/40 flex items-center justify-center">
+                    <svg class="w-5 h-3" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H22C23.1 16 24 15.1 24 14V2C24 0.9 23.1 0 22 0Z" fill="#252525"/>
+                      <path d="M9 11H15V5H9V11Z" fill="#2A7BE4"/>
+                    </svg>
+                  </div>
+                  <div class="w-8 h-5 bg-dark/70 rounded border border-mypurple/40 flex items-center justify-center">
+                    <svg class="w-5 h-3" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H22C23.1 16 24 15.1 24 14V2C24 0.9 23.1 0 22 0Z" fill="#252525"/>
+                      <path d="M15 6.5C15 8.43 13.43 10 11.5 10C9.57 10 8 8.43 8 6.5C8 4.57 9.57 3 11.5 3C13.43 3 15 4.57 15 6.5Z" fill="#FFB600"/>
+                      <path d="M11.5 10C9.57 10 8 8.43 8 6.5C8 4.57 9.57 3 11.5 3" fill="#F7981D"/>
+                      <path d="M11.5 10C13.43 10 15 8.43 15 6.5C15 4.57 13.43 3 11.5 3" fill="#E8000E"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Security Note -->
+            <div class="mb-6 bg-dark/50 rounded-lg p-3 border border-mypurple/40 flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-myyellow flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <p class="text-sm text-mywhite/80">
+                Vos informations de paiement sont sécurisées. Nous utilisons le cryptage SSL pour protéger vos données.
+              </p>
+            </div>
+            
+            <!-- Checkout Button -->
+            <button 
+              (click)="checkout()" 
+              class="w-full bg-myyellow text-dark font-orbitron font-semibold py-4 px-6 rounded-lg hover:bg-myyellow/90 transition-all duration-300 transform hover:-translate-y-1 shadow-glow hover:shadow-glow-hover flex items-center justify-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                <line x1="2" x2="22" y1="10" y2="10"></line>
+              </svg>
+              PAYER {{ stripeAmount | currency:'USD':'symbol':'1.2-2' }}
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Additional Info -->
+      <div class="mt-6 text-center text-sm text-mywhite/70">
+        <p>En effectuant ce paiement, vous acceptez nos <a href="#" class="text-mypink hover:text-mypink/80 transition-colors">conditions d'utilisation</a>.</p>
+      </div>
+    </div>
+  </div>
+  

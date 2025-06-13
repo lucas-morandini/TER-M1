@@ -1,0 +1,271 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark/80 backdrop-blur-sm animate-in fade-in duration-300">
+  <div class="relative w-full max-w-md max-h-[90vh] bg-gradient-to-b from-dark to-mypurple/90 rounded-xl shadow-2xl border border-mypink/30 overflow-hidden animate-in zoom-in-95 duration-300 flex flex-col">
+    <!-- Glowing border effect -->
+    <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-30 -z-10"></div>
+
+    <!-- Modal header -->
+    <div class="flex items-center justify-between p-5 border-b border-mypink/30 flex-shrink-0">
+      <h3 class="text-xl font-orbitron font-bold text-myyellow">
+        Créez votre compte
+      </h3>
+      <button type="button"
+              class="text-mywhite/70 hover:text-myyellow bg-mypurple/40 hover:bg-mypurple/60 rounded-full p-2 transition-all duration-200"
+              (click)="closeModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+        <span class="sr-only">Fermer la modal</span>
+      </button>
+    </div>
+
+    <!-- Modal body -->
+    <div class="p-5 overflow-y-auto flex-1">
+      <form [formGroup]="registerForm" class="space-y-4 pb-4" (ngSubmit)="register()">
+        <!-- Username -->
+        <div>
+          <label for="username" class="block mb-1.5 text-sm font-medium text-mywhite/90">Nom d'utilisateur</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-mypink">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <input type="text"
+                  id="username"
+                  formControlName="username"
+                  placeholder="Entrez votre nom d'utilisateur"
+                  class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-2.5 placeholder-mywhite/50"
+                  [class]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched ? 'border-red-500' : 'border-mypurple/50'" />
+          </div>
+          <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="mt-1 text-xs text-red-400">
+            Le nom d'utilisateur est requis
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block mb-1.5 text-sm font-medium text-mywhite/90">Email</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-mypink">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </div>
+            <input type="email"
+                  id="email"
+                  formControlName="email"
+                  placeholder="nom@entreprise.com"
+                  class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-2.5 placeholder-mywhite/50"
+                  [class]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched ? 'border-red-500' : 'border-mypurple/50'" />
+          </div>
+          <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="mt-1 text-xs text-red-400">
+            <span *ngIf="registerForm.get('email')?.errors?.['required']">L'email est requis</span>
+            <span *ngIf="registerForm.get('email')?.errors?.['email']">Format d'email invalide</span>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="password" class="block mb-1.5 text-sm font-medium text-mywhite/90">Mot de passe</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-mypink">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <input type="password"
+                  id="password"
+                  formControlName="password"
+                  placeholder="••••••••"
+                  class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-2.5 placeholder-mywhite/50"
+                  [class]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched ? 'border-red-500' : 'border-mypurple/50'" />
+          </div>
+
+          <!-- Password Requirements -->
+          <div *ngIf="getPasswordErrors()" class="mt-2 p-2 bg-dark/30 rounded-lg border border-mypurple/30">
+            <div class="text-xs text-mywhite/80 mb-1">Votre mot de passe doit contenir :</div>
+            <div class="space-y-1 text-xs">
+              <div class="flex items-center space-x-2">
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasUpperCase'] ? 'text-green-400' : 'text-red-400'">
+                  {{ getPasswordErrors() && !getPasswordErrors()!['hasUpperCase'] ? '✓' : '✗' }}
+                </span>
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasUpperCase'] ? 'text-green-400' : 'text-mywhite/60'">
+                  Au moins une majuscule
+                </span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasLowerCase'] ? 'text-green-400' : 'text-red-400'">
+                  {{ getPasswordErrors() && !getPasswordErrors()!['hasLowerCase'] ? '✓' : '✗' }}
+                </span>
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasLowerCase'] ? 'text-green-400' : 'text-mywhite/60'">
+                  Au moins une minuscule
+                </span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasNumeric'] ? 'text-green-400' : 'text-red-400'">
+                  {{ getPasswordErrors() && !getPasswordErrors()!['hasNumeric'] ? '✓' : '✗' }}
+                </span>
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasNumeric'] ? 'text-green-400' : 'text-mywhite/60'">
+                  Au moins un chiffre
+                </span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasSpecialChar'] ? 'text-green-400' : 'text-red-400'">
+                  {{ getPasswordErrors() && !getPasswordErrors()!['hasSpecialChar'] ? '✓' : '✗' }}
+                </span>
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['hasSpecialChar'] ? 'text-green-400' : 'text-mywhite/60'">
+                  Au moins un caractère spécial
+                </span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['isValidLength'] ? 'text-green-400' : 'text-red-400'">
+                  {{ getPasswordErrors() && !getPasswordErrors()!['isValidLength'] ? '✓' : '✗' }}
+                </span>
+                <span [class]="getPasswordErrors() && !getPasswordErrors()!['isValidLength'] ? 'text-green-400' : 'text-mywhite/60'">
+                  Au moins 8 caractères
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+          <label for="confirmPassword" class="block mb-1.5 text-sm font-medium text-mywhite/90">Confirmer le mot de passe</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-mypink">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <input type="password"
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                  placeholder="••••••••"
+                  class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-2.5 placeholder-mywhite/50"
+                  [class]="hasPasswordMismatch() ? 'border-red-500' : 'border-mypurple/50'" />
+          </div>
+          <div *ngIf="hasPasswordMismatch()" class="mt-1 text-xs text-red-400">
+            Les mots de passe ne correspondent pas
+          </div>
+        </div>
+
+        <!-- Two column layout for birth date and phone -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Birth Date -->
+          <div>
+            <label for="birth_date" class="block mb-1.5 text-sm font-medium text-mywhite/90">Date de naissance</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-mypink">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                  <line x1="16" x2="16" y1="2" y2="6"></line>
+                  <line x1="8" x2="8" y1="2" y2="6"></line>
+                  <line x1="3" x2="21" y1="10" y2="10"></line>
+                </svg>
+              </div>
+              <input type="date"
+                    id="birth_date"
+                    formControlName="birth_date"
+                    class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-2.5"
+                    [class]="registerForm.get('birth_date')?.invalid && registerForm.get('birth_date')?.touched ? 'border-red-500' : 'border-mypurple/50'" />
+            </div>
+            <div *ngIf="registerForm.get('birth_date')?.invalid && registerForm.get('birth_date')?.touched" class="mt-1 text-xs text-red-400">
+              La date de naissance est requise
+            </div>
+          </div>
+
+          <!-- Phone Number -->
+          <div>
+            <label for="tel" class="block mb-1.5 text-sm font-medium text-mywhite/90">Téléphone</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-mypink">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <input type="tel"
+                    id="tel"
+                    formControlName="tel"
+                    placeholder="Votre numéro"
+                    class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full pl-10 p-2.5 placeholder-mywhite/50"
+                    [class]="registerForm.get('tel')?.invalid && registerForm.get('tel')?.touched ? 'border-red-500' : 'border-mypurple/50'" />
+            </div>
+            <div *ngIf="registerForm.get('tel')?.invalid && registerForm.get('tel')?.touched" class="mt-1 text-xs text-red-400">
+              Le téléphone est requis
+            </div>
+          </div>
+        </div>
+
+        <!-- Two column layout for name and first name -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Name -->
+          <div>
+            <label for="name" class="block mb-1.5 text-sm font-medium text-mywhite/90">Nom</label>
+            <input type="text"
+                  id="name"
+                  formControlName="name"
+                  placeholder="Votre nom"
+                  class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full p-2.5 placeholder-mywhite/50"
+                  [class]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched ? 'border-red-500' : 'border-mypurple/50'" />
+            <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="mt-1 text-xs text-red-400">
+              Le nom est requis
+            </div>
+          </div>
+
+          <!-- First Name -->
+          <div>
+            <label for="first_name" class="block mb-1.5 text-sm font-medium text-mywhite/90">Prénom</label>
+            <input type="text"
+                  id="first_name"
+                  formControlName="first_name"
+                  placeholder="Votre prénom"
+                  class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full p-2.5 placeholder-mywhite/50"
+                  [class]="registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched ? 'border-red-500' : 'border-mypurple/50'" />
+            <div *ngIf="registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched" class="mt-1 text-xs text-red-400">
+              Le prénom est requis
+            </div>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div>
+          <label for="sex" class="block mb-1.5 text-sm font-medium text-mywhite/90">Sexe</label>
+          <select id="sex"
+                 formControlName="sex"
+                 class="bg-dark/50 border text-mywhite text-sm rounded-lg focus:ring-mypink focus:border-mypink block w-full p-2.5"
+                 [class]="registerForm.get('sex')?.invalid && registerForm.get('sex')?.touched ? 'border-red-500' : 'border-mypurple/50'">
+            <option value="" disabled>Sélectionnez</option>
+            <option value="H">Homme</option>
+            <option value="F">Femme</option>
+          </select>
+          <div *ngIf="registerForm.get('sex')?.invalid && registerForm.get('sex')?.touched" class="mt-1 text-xs text-red-400">
+            Le sexe est requis
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="pt-2">
+          <button type="submit"
+                 [disabled]="registerForm.invalid"
+                 class="w-full bg-gradient-to-r from-myyellow to-myyellow/90 text-dark font-orbitron font-semibold py-3 px-6 rounded-lg hover:from-myyellow/90 hover:to-myyellow transition-all duration-300 transform hover:-translate-y-1 shadow-glow hover:shadow-glow-hover disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+            CRÉER MON COMPTE
+          </button>
+        </div>
+
+        <!-- Terms and conditions -->
+        <div class="text-xs text-mywhite/60 text-center mt-4">
+          En créant un compte, vous acceptez nos
+          <a href="#" class="text-mypink hover:text-mypink/80 transition-colors">Conditions d'utilisation</a>
+          et notre
+          <a href="#" class="text-mypink hover:text-mypink/80 transition-colors">Politique de confidentialité</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

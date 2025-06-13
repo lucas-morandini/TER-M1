@@ -1,0 +1,43 @@
+image: node:20.17
+variables:
+  DOCKER_CPUS: "4.0"
+stages:
+  - install_angular
+  - test
+
+install_ang:
+  stage: install_angular
+  image: node:20.17
+  script:
+    - cd frontend
+    - npm install -g @angular/cli
+    - npm install
+    - mkdir -p .angular/cache/  # Assure que le cache Angular existe
+    - cd ..
+  artifacts:
+    name: "dependencies-${CI_PIPELINE_ID}"
+    paths:
+      - frontend/node_modules/
+      - frontend/.angular/cache/
+    expire_in: 1h
+
+test_ang:
+  stage: test
+  image: jhinnz/my-custom-node-chrome-image
+  cache:
+    key: npm-cache
+    paths:
+      - frontend/node_modules/
+      - frontend/.angular/cache/
+  script:
+    - cd commons
+    - npm install -g typescript
+    - npm install
+    - npx tsc -b
+    - cd ../frontend
+    - export NODE_OPTIONS="--max-old-space-size=4096"  # Augmente la mémoire allouée
+    - npm run test -- --no-watch --browsers=ChromeHeadlessNoSandbox --code-coverage --no-progress  # Ajout des options pour éviter les erreurs de mémoire et de rendu
+    - cd ..
+
+
+

@@ -1,0 +1,9 @@
+FROM python:3.12.10-slim
+
+# Installer unzip
+RUN apt-get update && apt-get install -y unzip
+
+WORKDIR /usr/src/bookmaker
+
+# Copier le projet dans l'image
+COPY bookmaker-model/ ./bookmaker-model

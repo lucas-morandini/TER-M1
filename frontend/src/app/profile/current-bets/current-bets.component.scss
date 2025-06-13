@@ -1,0 +1,27 @@
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-mypink);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+  
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 25px;
+      background-color: var(--color-myyellow);
+      margin-right: 10px;
+      border-radius: 3px;
+    }
+  }
+  

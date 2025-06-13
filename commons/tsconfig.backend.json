@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "outDir": "../backend/src/shared/commons", // Envoie vers backend
+        "rootDir": "./",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true // Génère les fichiers .d.ts pour les types
+    },
+    "include": ["**/*.ts"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+}

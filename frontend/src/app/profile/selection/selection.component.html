@@ -1,0 +1,14 @@
+<h1>OUHOU</h1>
+<div class="profile-container">
+  <section class="mb-12">
+    <h2 class="font-orbitron text-2xl font-semibold mb-6 text-mypink uppercase flex items-center">
+      <span class="inline-block w-1.5 h-6 bg-myyellow rounded mr-2.5"></span>
+      Vos Paris Actifs
+    </h2>
+    <div class="relative bg-gradient-to-br from-mypurple/30 to-mypink/10 rounded-xl p-6 shadow-lg border border-mypurple/50 overflow-hidden">
+      <!-- Glowing border effect -->
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-mypurple via-mypink to-myyellow rounded-xl blur-md opacity-70 -z-10"></div>
+      <app-bet-list [betIds]="betIds"></app-bet-list>
+    </div>
+  </section>
+</div>

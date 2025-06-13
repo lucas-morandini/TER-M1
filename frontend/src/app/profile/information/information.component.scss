@@ -1,0 +1,24 @@
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .user-info {
+    h1 {
+      margin-bottom: 2rem;
+    }
+  }
+  
+  .user-details {
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: var(--color-mywhite);
+    }
+  
+    strong {
+      color: var(--color-myyellow);
+    }
+  }
+  

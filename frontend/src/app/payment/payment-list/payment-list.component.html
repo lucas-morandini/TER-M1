@@ -1,0 +1,32 @@
+<div class="min-h-screen bg-darker text-mywhite font-rajdhani py-8">
+    <div class="max-w-4xl mx-auto px-4">
+      <!-- Payment List Header -->
+      <div class="text-center mb-8">
+        <h1 class="font-orbitron text-3xl md:text-4xl font-bold mb-2 text-myyellow">
+          HISTORIQUE DES PAIEMENTS
+        </h1>
+        <p class="text-mywhite/80 text-lg">Votre historique de paiements</p>
+      </div>
+  
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="text-center">
+        <p class="text-mywhite">Chargement des paiements...</p>
+      </div>
+  
+      <!-- Payment List -->
+      <div *ngIf="!isLoading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <app-payment-card
+          *ngFor="let payment of payments"
+          [paymentId]="payment.id">
+        </app-payment-card>
+      </div>
+  
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && payments.length === 0" class="bg-gradient-to-br from-dark to-mypurple/90 rounded-2xl shadow-xl border border-mypurple/60 p-12 text-center">
+        <div class="text-mypink text-5xl mb-4">💳</div>
+        <h3 class="text-mywhite font-orbitron text-xl mb-2">Aucun paiement trouvé</h3>
+        <p class="text-mywhite/80 mb-6">Vous n'avez effectué aucun paiement.</p>
+      </div>
+    </div>
+  </div>
+  
